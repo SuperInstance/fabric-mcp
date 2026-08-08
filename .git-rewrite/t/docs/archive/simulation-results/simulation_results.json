@@ -1,0 +1,159 @@
+{
+  "network_scaling": [
+    {
+      "n_cells": 100,
+      "total_connections": 500,
+      "total_sensation_links": 1248,
+      "avg_incoming": 5.0,
+      "max_incoming": 14,
+      "load_variance": 5.58,
+      "scaling_factor": 5.0
+    },
+    {
+      "n_cells": 500,
+      "total_connections": 2500,
+      "total_sensation_links": 6208,
+      "avg_incoming": 5.0,
+      "max_incoming": 15,
+      "load_variance": 5.2,
+      "scaling_factor": 5.0
+    },
+    {
+      "n_cells": 1000,
+      "total_connections": 5000,
+      "total_sensation_links": 12578,
+      "avg_incoming": 5.0,
+      "max_incoming": 15,
+      "load_variance": 5.186,
+      "scaling_factor": 5.0
+    },
+    {
+      "n_cells": 5000,
+      "total_connections": 25000,
+      "total_sensation_links": 62455,
+      "avg_incoming": 5.0,
+      "max_incoming": 15,
+      "load_variance": 5.0448,
+      "scaling_factor": 5.0
+    },
+    {
+      "n_cells": 10000,
+      "total_connections": 50000,
+      "total_sensation_links": 124974,
+      "avg_incoming": 5.0,
+      "max_incoming": 14,
+      "load_variance": 4.8674,
+      "scaling_factor": 5.0
+    },
+    {
+      "n_cells": 50000,
+      "total_connections": 250000,
+      "total_sensation_links": 624829,
+      "avg_incoming": 5.0,
+      "max_incoming": 16,
+      "load_variance": 5.0088,
+      "scaling_factor": 5.0
+    },
+    {
+      "n_cells": 100000,
+      "total_connections": 500000,
+      "total_sensation_links": 1249796,
+      "avg_incoming": 5.0,
+      "max_incoming": 16,
+      "load_variance": 5.02386,
+      "scaling_factor": 5.0
+    }
+  ],
+  "processing_load": [
+    {
+      "elapsed_time": 2.1436069011688232,
+      "total_sensations": 124100,
+      "sensations_per_second": 57893.07728592086,
+      "avg_latency_ms": 0.01727322241070768,
+      "n_cells": 100
+    },
+    {
+      "elapsed_time": 12.596640348434448,
+      "total_sensations": 623700,
+      "sensations_per_second": 49513.20215135899,
+      "avg_latency_ms": 0.02019663355529012,
+      "n_cells": 500
+    },
+    {
+      "elapsed_time": 22.621774673461914,
+      "total_sensations": 1255000,
+      "sensations_per_second": 55477.5219060186,
+      "avg_latency_ms": 0.01802531846490989,
+      "n_cells": 1000
+    },
+    {
+      "elapsed_time": 50.99128174781799,
+      "total_sensations": 3111400,
+      "sensations_per_second": 61018.27397451413,
+      "avg_latency_ms": 0.016388533055157806,
+      "n_cells": 5000
+    },
+    {
+      "elapsed_time": 102.78684735298157,
+      "total_sensations": 6257500,
+      "sensations_per_second": 60878.41159784814,
+      "avg_latency_ms": 0.016426184155490464,
+      "n_cells": 10000
+    }
+  ],
+  "sensation_distribution": {
+    "type_counts": {
+      "pattern": 2115,
+      "absolute": 2107,
+      "presence": 2027,
+      "velocity": 2092,
+      "acceleration": 2011,
+      "anomaly": 2063
+    }
+  },
+  "memory_usage": [
+    {
+      "n_cells": 100,
+      "memory_mb": 0.15000000000000002,
+      "memory_per_cell_kb": 1.5360000000000003
+    },
+    {
+      "n_cells": 500,
+      "memory_mb": 0.75,
+      "memory_per_cell_kb": 1.536
+    },
+    {
+      "n_cells": 1000,
+      "memory_mb": 1.5,
+      "memory_per_cell_kb": 1.536
+    },
+    {
+      "n_cells": 5000,
+      "memory_mb": 7.5,
+      "memory_per_cell_kb": 1.536
+    },
+    {
+      "n_cells": 10000,
+      "memory_mb": 15.0,
+      "memory_per_cell_kb": 1.536
+    },
+    {
+      "n_cells": 50000,
+      "memory_mb": 75.0,
+      "memory_per_cell_kb": 1.536
+    },
+    {
+      "n_cells": 100000,
+      "memory_mb": 150.0,
+      "memory_per_cell_kb": 1.536
+    }
+  ],
+  "cascade_analysis": {
+    "n_cells": 1000,
+    "top_1pct_count": 10,
+    "cascade_affected": 120,
+    "cascade_pct": 12.0,
+    "avg_incoming": 5.0,
+    "std_incoming": 2.219909908081857
+  }
+}

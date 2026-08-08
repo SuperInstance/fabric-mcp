@@ -1,0 +1,284 @@
+# GitLab CI/CD Configuration for Comprehensive Test Suite
+
+stages:
+  - test
+  - coverage
+  - security
+  - report
+
+variables:
+  NODE_VERSION: "20"
+  COVERAGE_THRESHOLD: "82"
+
+# Cache node_modules between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .npm/
+
+before_script:
+  - npm ci --prefer-offline --no-audit
+
+# Module-specific test jobs
+test:analytics:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:analytics
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+test:i18n:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:i18n
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+test:accessibility:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:accessibility
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+test:performance:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:performance
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+test:security:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:security
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+test:api:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:api
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+test:community:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:community
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# Full test suite
+test:all:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run test:ci
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+      - test-results/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# Coverage validation
+coverage:check:
+  stage: coverage
+  image: node:${NODE_VERSION}
+  dependencies:
+    - test:all
+  script:
+    - |
+      COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+      echo "Current coverage: ${COVERAGE}%"
+      if (( $(echo "$COVERAGE < $COVERAGE_THRESHOLD" | bc -l) )); then
+        echo "Coverage ${COVERAGE}% is below ${COVERAGE_THRESHOLD}% threshold"
+        exit 1
+      fi
+      echo "Coverage ${COVERAGE}% meets threshold"
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# Security scanning
+security:audit:
+  stage: security
+  image: node:${NODE_VERSION}
+  script:
+    - npm audit --audit-level=moderate
+  allow_failure: true
+  only:
+    - merge_requests
+    - main
+    - develop
+
+security:snyk:
+  stage: security
+  image: node:${NODE_VERSION}
+  script:
+    - npm install -g snyk
+    - snyk test --severity-threshold=high
+  allow_failure: true
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# Test report generation
+test:report:
+  stage: report
+  image: node:${NODE_VERSION}
+  dependencies:
+    - test:all
+  script:
+    - |
+      echo "# Test Report - ${CI_COMMIT_REF_NAME}" > test-report.md
+      echo "" >> test-report.md
+      echo "## Commit" >> test-report.md
+      echo "- Branch: ${CI_COMMIT_REF_NAME}" >> test-report.md
+      echo "- SHA: ${CI_COMMIT_SHA}" >> test-report.md
+      echo "- Author: ${CI_COMMIT_AUTHOR}" >> test-report.md
+      echo "" >> test-report.md
+      echo "## Coverage Summary" >> test-report.md
+      cat coverage/coverage-summary.json | jq -r '"- Lines: " + (.total.lines.pct | tostring) + "%"' >> test-report.md
+      cat coverage/coverage-summary.json | jq -r '"- Functions: " + (.total.functions.pct | tostring) + "%"' >> test-report.md
+      cat coverage/coverage-summary.json | jq -r '"- Branches: " + (.total.branches.pct | tostring) + "%"' >> test-report.md
+      cat coverage/coverage-summary.json | jq -r '"- Statements: " + (.total.statements.pct | tostring) + "%"' >> test-report.md
+  artifacts:
+    paths:
+      - test-report.md
+    expire_in: 30 days
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# Performance monitoring
+test:performance-monitor:
+  stage: report
+  image: node:${NODE_VERSION}
+  dependencies:
+    - test:all
+  script:
+    - |
+      echo "Measuring test execution time..."
+      START_TIME=$(date +%s)
+      npm run test:ci
+      END_TIME=$(date +%s)
+      DURATION=$((END_TIME - START_TIME))
+      echo "Test execution time: ${DURATION}s"
+      if [ $DURATION -gt 300 ]; then
+        echo "WARNING: Tests exceeded 5-minute target"
+        exit 1
+      fi
+  allow_failure: true
+  only:
+    - merge_requests
+    - main
+    - develop
+
+# Lint check
+lint:
+  stage: test
+  image: node:${NODE_VERSION}
+  script:
+    - npm run lint -- tests/
+  only:
+    - merge_requests
+    - main
+    - develop

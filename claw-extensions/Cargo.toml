@@ -1,0 +1,91 @@
+[package]
+name = "claw-extensions"
+version = "0.1.0"
+edition = "2021"
+description = "Advanced extensions for claw-core cellular agent engine"
+authors = ["SuperInstance <team@superinstance.dev>"]
+license = "MIT"
+repository = "https://github.com/SuperInstance/claw-extensions"
+documentation = "https://docs.rs/claw-extensions"
+readme = "README.md"
+keywords = ["agents", "cellular", "automation", "ai", "multi-agent"]
+categories = ["development-tools", "api-bindings"]
+
+[dependencies]
+# Core dependency
+claw-core = { version = "0.1", path = "../claw/core" }
+
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+async-trait = "0.1"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utilities
+uuid = { version = "1.6", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+# Optional dependencies by feature
+# WebSocket
+tokio-tungstenite = { version = "0.21", optional = true }
+futures-util = { version = "0.3", optional = true }
+
+# GPU
+wgpu = { version = "0.19", optional = true }
+cust = { version = "0.3", optional = true }
+
+# Learning
+ndarray = { version = "0.15", optional = true }
+candle-core = { version = "0.3", optional = true }
+
+# Monitoring
+prometheus = { version = "0.13", optional = true }
+metrics = { version = "0.22", optional = true }
+
+[dev-dependencies]
+tokio-test = "0.4"
+criterion = "0.5"
+mockall = "0.12"
+
+[features]
+default = []
+
+# Individual extensions
+equipment = ["tokio/process"]
+social = ["tokio/process"]
+learning = ["ndarray", "candle-core"]
+bot = ["tokio/time"]
+websocket = ["tokio-tungstenite", "futures-util"]
+gpu = ["wgpu"]
+gpu-cuda = ["cust"]
+monitoring = ["prometheus", "metrics"]
+
+# All extensions
+full = ["equipment", "social", "learning", "bot", "websocket", "gpu", "monitoring"]
+
+# Benchmarking
+bench = []
+
+[[bench]]
+name = "equipment_bench"
+harness = false
+required-features = ["equipment"]
+
+[[bench]]
+name = "social_bench"
+harness = false
+required-features = ["social"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

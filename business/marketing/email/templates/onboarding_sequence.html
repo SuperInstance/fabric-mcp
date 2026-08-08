@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with SuperInstance</title>
+    <style type="text/css">
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+        @media screen and (max-width: 525px) {
+            .wrapper { width: 100% !important; }
+            .mobile-padding { padding-left: 20px !important; padding-right: 20px !important; }
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 40px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            margin: 0;
+            font-weight: 600;
+        }
+        .content {
+            padding: 40px;
+        }
+        .progress-bar {
+            background-color: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            height: 100%;
+        }
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .checklist-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        .checkbox {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+        .button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .divider {
+            height: 1px;
+            background-color: #e9ecef;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1>Getting Started with SuperInstance</h1>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <h2>Your Setup Checklist</h2>
+
+                <p>Hi {{first_name}},</p>
+
+                <p>Welcome aboard! Let's get your SuperInstance account set up for success. Complete these 5 steps to unlock the full power of distributed AI.</p>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 20%;"></div>
+                </div>
+                <p style="font-size: 14px; color: #6c757d;">Step 1 of 5</p>
+
+                <h3>Your Quick-Start Checklist</h3>
+
+                <div class="checklist-item">
+                    <span class="checkbox"></span>
+                    <strong>Confirm your email address</strong><br>
+                    <span style="color: #6c757d; font-size: 14px;">Verify your account to access all features</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checkbox"></span>
+                    <strong>Complete your profile</strong><br>
+                    <span style="color: #6c757d; font-size: 14px;">Add your research interests and role</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checkbox"></span>
+                    <strong>Choose your use case</strong><br>
+                    <span style="color: #6c757d; font-size: 14px;">Research, Development, Education, or Exploration</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checkbox"></span>
+                    <strong>Create your first project</strong><br>
+                    <span style="color: #6c757d; font-size: 14px;">Follow our guided tutorial</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checkbox"></span>
+                    <strong>Join the community</strong><br>
+                    <span style="color: #6c757d; font-size: 14px;">Connect with 10,000+ researchers and developers</span>
+                </div>
+
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="center" style="padding: 10px;">
+                            <a href="{{dashboard_url}}" class="button">Complete Setup Now</a>
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Why Complete Setup?</h3>
+
+                <p>Users who complete setup within 24 hours are <strong>5x more likely</strong to achieve their first breakthrough result with SuperInstance.</p>
+
+                <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <p style="margin: 0;"><strong>💡 Pro Tip:</strong> Set aside 15 minutes to complete all 5 steps. Our guided tutorial will walk you through each one.</p>
+                </div>
+
+                <h3>Need Help?</h3>
+
+                <p>Our support team is here to help you succeed:</p>
+                <ul>
+                    <li><a href="{{docs_url}}">Documentation</a> - Comprehensive guides</li>
+                    <li><a href="{{community_url}}">Community Forum</a> - Get answers from experts</li>
+                    <li><a href="{{support_url}}">Email Support</a> - We reply within 2 hours</li>
+                </ul>
+
+                <p>Your next email arrives in 2 days with a guide to creating your first distributed AI experiment.</p>
+
+                <p>
+                    <strong>The SuperInstance Team</strong>
+                </p>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="divider"></div>
+                <p>
+                    <a href="{{dashboard_url}}">Go to Dashboard</a> |
+                    <a href="{{tutorial_url}}">View Tutorial</a> |
+                    <a href="{{support_url}}">Get Help</a>
+                </p>
+                <div class="divider"></div>
+                <p>&copy; 2026 SuperInstance. All rights reserved.</p>
+                <p style="font-size: 12px; color: #adb5bd;">
+                    <a href="{{unsubscribe_url}}">Unsubscribe</a> |
+                    <a href="{{preferences_url}}">Manage Preferences</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

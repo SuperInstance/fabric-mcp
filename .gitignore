@@ -1,0 +1,144 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Testing
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.db-journal
+prisma/*.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archive files (large binaries)
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tbz2
+*.tar.xz
+*.txz
+*.7z
+*.rar
+*.gz
+*.bz2
+*.xz
+
+# Large binary files
+*.dll
+*.exe
+*.bin
+*.iso
+*.img
+*.dmg
+*.pkg
+*.deb
+*.rpm
+
+# Data files (potentially large)
+*.csv
+*.parquet
+*.hdf5
+*.h5
+*.pkl
+*.pickle
+*.npz
+
+# Media files (excluding essential docs)
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.mov
+
+# Model files (large ML models)
+*.gguf
+*.safetensors
+*.onnx
+*.pb
+
+# Misc
+.claude/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Windows and malformed paths
+**/productioncrdt_deployment/
+nul
+
+# Local research workspace (not part of POLLN)
+reseachlocal/
+apikey/
+
+# API Keys and Secrets (SECURITY CRITICAL)
+.env*.key
+.env*.secret
+*api_key*
+*apikey*
+*secret*
+secrets/
+credentials/
+*.pem
+*.key
+.secrets/
+.creds/
+deepseek.com
+*.deepseek.*
+*deepseek*
+LOG-tensor/
+
+# Large download directories
+research/lucineer_analysis/lucineer/download/
+research/lucineer_analysis/lucineer/upload/
+research/lucineer_analysis/lucineer/public/
+
+# Large checkpoint and result files
+simulations/smp-validation/results/
+*.checkpoint
+*.ckpt
+
+# Package manager locks (large files)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Research artifacts
+**/download/
+**/upload/
+**/public/
